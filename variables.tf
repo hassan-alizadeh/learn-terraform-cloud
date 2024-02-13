@@ -1,6 +1,7 @@
 variable "region" {
   description = "AWS region"
-  default     = "us-west-1"
+  default     = "eu-west-1"
+#  subnet="subnet-0e2ee695eaf058ac2"
 }
 
 variable "instance_type" {
