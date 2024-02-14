@@ -1,12 +1,11 @@
 variable "region" {
   description = "AWS region"
   default     = "eu-west-1"
-#  subnet="subnet-0e2ee695eaf058ac2"
 }
 
 variable "instance_type" {
   description = "Type of EC2 instance to provision"
-  default     = "t2.small"
+  default     = "t2.micro"
 }
 
 variable "instance_name" {

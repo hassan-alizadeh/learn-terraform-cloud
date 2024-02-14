@@ -17,7 +17,6 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
-/*
 
 resource "aws_instance" "ubuntu" {
   ami           = data.aws_ami.ubuntu.id
@@ -28,4 +27,3 @@ resource "aws_instance" "ubuntu" {
     Name = var.instance_name
   }
 }
-*/
