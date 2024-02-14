@@ -23,6 +23,7 @@ resource "aws_instance" "ubuntu" {
   instance_type = var.instance_type
   subnet_id     = "subnet-0e2ee695eaf058ac2"
 
+
   tags = {
     Name = var.instance_name
   }
