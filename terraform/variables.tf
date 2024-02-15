@@ -1,6 +1,7 @@
 locals {
   glue_src_path = "${path.root}/../glue/"
 }
+/*
 
 variable "s3_bucket" {
   type=string
@@ -10,4 +11,4 @@ variable "s3_bucket" {
 variable "project" {
   type=string
   project = "terraform_glue_job_deployment"
-}
+}*/
