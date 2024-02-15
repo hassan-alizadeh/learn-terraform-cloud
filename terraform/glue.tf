@@ -21,6 +21,7 @@ resource "aws_glue_job" "test_deploy_script" {
 
   command {
     name= "pythonshell" #"glueetl"  #optional
+    python_version= "3.9"
     script_location = "s3://${var.s3_bucket}/glue/scripts/TestDeployScript.py" #required
   }
 
