@@ -10,9 +10,9 @@ terraform {
 }
 
 
-  provider "aws" {
+provider "aws" {
     region = "eu-west-1"  # Set your desired AWS region
-    profile = "default"
+#    profile = "default"
 }
 
 
