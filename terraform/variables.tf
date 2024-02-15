@@ -1,15 +1,11 @@
-variable "region" {
-  description = "AWS region"
-  default     = "eu-west-1"
+locals {
+  glue_src_path = "${path.root}/../glue/"
 }
 
-variable "instance_type" {
-  description = "Type of EC2 instance to provision"
-  default     = "t2.micro"
+variable "s3_bucket" {
+  type=string
 }
 
-variable "instance_name" {
-  description = "EC2 instance name"
-  default     = "Provisioned by Terraform"
+variable "project" {
+  type=string
 }
-
