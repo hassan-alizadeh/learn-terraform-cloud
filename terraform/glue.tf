@@ -2,7 +2,7 @@ resource "aws_s3_object" "test_deploy_script_s3" {
   bucket = var.s3_bucket
   key = "glue/scripts/TestDeployScript.py"
   source = "${local.glue_src_path}TestDeployScript.py"
-  etag = filemd5("${local.glue_src_path}TestDeployScript.py")
+#  etag = filemd5("${local.glue_src_path}TestDeployScript.py")
 }
 
 resource "aws_glue_job" "test_deploy_script" {
