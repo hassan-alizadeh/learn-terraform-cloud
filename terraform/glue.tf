@@ -19,6 +19,7 @@ resource "aws_glue_job" "test_deploy_script" {
     project = var.project #optional
   }
 
+
   command {
     name= "pythonshell" #"glueetl"  #optional
     python_version= "3.9"
