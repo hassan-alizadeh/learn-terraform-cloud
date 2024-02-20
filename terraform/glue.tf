@@ -5,6 +5,7 @@ data "local_file" "glue_scripts" {
   filename = "${local.glue_src_path}/${each.key}"
 }
 
+
 locals {
   glue_jobs = {
     for filename, file in data.local_file.glue_scripts : replace(filename, ".py", "") => {
