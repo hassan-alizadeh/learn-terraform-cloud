@@ -21,7 +21,7 @@ resource "aws_s3_bucket_object" "glue_job_scripts" {
   bucket = var.s3_bucket
   key    = each.value.script_key
   source = each.value.script_path
-  etag   = filemd5(each.value.script_path)
+#  etag   = filemd5(each.value.script_path)
 }
 
 resource "aws_glue_job" "glue_jobs" {
