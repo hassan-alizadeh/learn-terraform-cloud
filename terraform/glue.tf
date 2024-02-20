@@ -2,14 +2,14 @@ locals {
   glue_jobs = [
     {
       name = "TestDeployScript"
-      script_key = "glue/scripts/TestDeployScript.py"
-      script_path = "${local.glue_src_path}TestDeployScript.py"
-    }/*,
+      script_key = "glue/scripts/TestDeployScript1.py"
+      script_path = "${local.glue_src_path}TestDeployScript1.py"
+    },
     {
       name = "TestDeployScript2"
       script_key = "glue/scripts/TestDeployScript2.py"
       script_path = "${local.glue_src_path}TestDeployScript2.py"
-    }*/
+    }
     # Add more Glue job configurations as needed
   ]
 }
