@@ -14,6 +14,7 @@ locals {
   ]
 }
 
+
 resource "aws_s3_bucket_object" "glue_job_scripts" {
   for_each = { for job in local.glue_jobs : job.name => job }
 
