@@ -15,6 +15,10 @@ locals {
   ]...)
 }
 
+output "glue_job_folders_output" {
+  value = local.glue_job_folders
+}
+
 resource "aws_s3_object" "glue_job_scripts" {
   for_each = { for job, config in local.glue_job_configs : job => config }
 
@@ -22,6 +26,16 @@ resource "aws_s3_object" "glue_job_scripts" {
   key    = "${each.key}/${each.value.script_key}"
   source = "${each.key}/${each.value.script_path}"
   etag   = filemd5("${each.key}/${each.value.script_path}")
+}
+
+# Output block for each key
+output "glue_job_script_keys" {
+  value = { for key, _ in aws_s3_bucket_object.glue_job_scripts : key => key }
+}
+
+# Output block for each source
+output "glue_job_script_sources" {
+  value = { for key, obj in aws_s3_bucket_object.glue_job_scripts : key => obj.source }
 }
 
 resource "aws_glue_job" "glue_jobs" {
