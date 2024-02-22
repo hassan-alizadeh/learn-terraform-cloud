@@ -15,8 +15,6 @@ locals {
   ]...)
 }
 
-
-
 output "glue_job_folders_output" {
   value = local.glue_job_folders
 }
