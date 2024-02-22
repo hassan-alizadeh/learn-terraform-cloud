@@ -15,7 +15,7 @@ locals {
   ]...)
 }
 
-resource "aws_s3_bucket_object" "glue_job_scripts" {
+resource "aws_s3_object" "glue_job_scripts" {
   for_each = { for job, config in local.glue_job_configs : job => config }
 
   bucket = var.s3_bucket
