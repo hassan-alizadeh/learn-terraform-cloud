@@ -1,7 +1,7 @@
 #glue.tf
 
 locals {
-  glue_job_folders = fileset(path.root, "${path.root}../glue/**")
+  glue_job_folders = fileset(path.root, "../glue/**")
 }
 
 output "glue_job_folders_output" {
