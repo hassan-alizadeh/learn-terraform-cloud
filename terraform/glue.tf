@@ -1,7 +1,7 @@
 #glue.tf
 
 locals {
-  glue_job_folders = fileset(path.root, "../glue/**")
+  glue_job_folders = fileset(path.root, "../glue/**/*.tf")
 }
 
 output "glue_job_folders_output" {
@@ -10,13 +10,13 @@ output "glue_job_folders_output" {
 
 # Iterate over all Glue job folders and include their deploy.tf files
 locals {
-  glue_job_configs = merge([
+  glue_job_configs = join("\n\n",[
     for job in local.glue_job_folders :
     try(
-      yamldecode(file("${job}/deploy.tf")),
+      yamldecode(file(job)),
       {}
     )
-  ]...)
+  ])
 }
 
 
