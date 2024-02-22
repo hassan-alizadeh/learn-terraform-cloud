@@ -1,5 +1,4 @@
 #glue.tf
-# glue.tf
 
 locals {
   glue_job_folders = fileset(path.root, "../glue/*")
@@ -8,9 +7,9 @@ locals {
 # Iterate over all Glue job folders and include their deploy.tf files
 locals {
   glue_job_configs = merge([
-    for folder in local.glue_job_folders :
+    for job in local.glue_job_folders :
     try(
-      yamldecode(file("${folder}/deploy.tf")),
+      yamldecode(file("${job}/deploy.tf")),
       {}
     )
   ]...)
@@ -20,9 +19,9 @@ resource "aws_s3_bucket_object" "glue_job_scripts" {
   for_each = { for job, config in local.glue_job_configs : job => config }
 
   bucket = var.s3_bucket
-  key    = "${job}/${each.value.script_key}"
-  source = "${job}/${each.value.script_path}"
-  etag   = filemd5("${job}/${each.value.script_path}")
+  key    = "${each.key}/${each.value.script_key}"
+  source = "${each.key}/${each.value.script_path}"
+  etag   = filemd5("${each.key}/${each.value.script_path}")
 }
 
 resource "aws_glue_job" "glue_jobs" {
@@ -35,7 +34,7 @@ resource "aws_glue_job" "glue_jobs" {
   command {
     name            = "pythonshell"
     python_version  = "3.9"
-    script_location = "s3://${var.s3_bucket}/${job}/${each.value.script_key}"
+    script_location = "s3://${var.s3_bucket}/${each.key}/${each.value.script_key}"
   }
 
   default_arguments = {
