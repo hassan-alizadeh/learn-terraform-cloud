@@ -30,12 +30,12 @@ resource "aws_s3_object" "glue_job_scripts" {
 
 # Output block for each key
 output "glue_job_script_keys" {
-  value = { for key, _ in aws_s3_bucket_object.glue_job_scripts : key => key }
+  value = { for key, _ in aws_s3_object.glue_job_scripts : key => key }
 }
 
 # Output block for each source
 output "glue_job_script_sources" {
-  value = { for key, obj in aws_s3_bucket_object.glue_job_scripts : key => obj.source }
+  value = { for key, obj in aws_s3_object.glue_job_scripts : key => obj.source }
 }
 
 resource "aws_glue_job" "glue_jobs" {
