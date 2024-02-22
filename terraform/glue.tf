@@ -1,7 +1,11 @@
 #glue.tf
 
 locals {
-  glue_job_folders = fileset(path.root, "../glue/*")
+  glue_job_folders = fileset(path.root, "${path.root}../glue/**")
+}
+
+output "glue_job_folders_output" {
+  value = local.glue_job_folders
 }
 
 # Iterate over all Glue job folders and include their deploy.tf files
@@ -15,9 +19,7 @@ locals {
   ]...)
 }
 
-output "glue_job_folders_output" {
-  value = local.glue_job_folders
-}
+
 
 resource "aws_s3_object" "glue_job_scripts" {
   for_each = { for job, config in local.glue_job_configs : job => config }
