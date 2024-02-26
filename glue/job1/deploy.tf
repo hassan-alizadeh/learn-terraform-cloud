@@ -15,6 +15,23 @@ variable "glue_service_role_arn" {
   type = string
 }
 
+
+
+variable "module_path" {
+  type    = string
+#  default = "/glue/job1/"
+}
+
+locals {
+  module_name = basename(var.module_path)
+}
+
+output "module_name" {
+  value = local.module_name
+}
+
+
+
 resource "aws_s3_object" "this" {
   bucket = var.s3_bucket
   key = "glue/job1/main.py"
@@ -58,15 +75,4 @@ output "output-role_arn" {
   value = var.glue_service_role_arn
 }
 
-variable "module_path" {
-  type    = string
-#  default = "/glue/job1/"
-}
 
-locals {
-  module_name = basename(var.module_path)
-}
-
-output "module_name" {
-  value = local.module_name
-}
