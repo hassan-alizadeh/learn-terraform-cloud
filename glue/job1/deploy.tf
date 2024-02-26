@@ -16,6 +16,7 @@ variable "glue_service_role_arn" {
 }
 
 
+/*
 
 variable "module_path" {
   type    = string
@@ -30,6 +31,7 @@ output "module_name" {
   value = local.module_name
 }
 
+*/
 
 
 resource "aws_s3_object" "this" {
