@@ -13,8 +13,9 @@ variable "project" {
   default = "terraform_glue_job_deployment"
 }
 
+/*
 
 variable "module_path" {
   type    = string
   default = "/glue/"
-}
+}*/

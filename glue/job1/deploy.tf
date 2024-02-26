@@ -22,16 +22,16 @@ variable "module_path" {
   type    = string
 #  default = "/glue/job1/"
 }
-
+*/
 locals {
-  module_name = basename(var.module_path)
+#  module_name = [for dir in fileset(path.module, "../glue/**/*.tf"): dirname(dir)]
+  module_path = dirname(fileset(path.module, "deploy.tf"))
+  module_name = element(split("/", module_path), length(split("/", module_path)) - 1)
 }
 
 output "module_name" {
   value = local.module_name
 }
-
-*/
 
 
 resource "aws_s3_object" "this" {
@@ -44,7 +44,7 @@ resource "aws_s3_object" "this" {
 
 # Define the Glue job resource
 resource "aws_glue_job" "this" {
-  name        = "job1"#var.job_name
+  name        =local.module_name #"job1"#var.job_name
   description = "Desc job1" #var.job_description
   role_arn    = var.glue_service_role_arn
 
