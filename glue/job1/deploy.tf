@@ -38,7 +38,7 @@ resource "aws_s3_object" "this" {
   bucket = var.s3_bucket
   key = "glue/${local.module_name}/main.py"
   source = "../glue/${local.module_name}/main.py"
-  etag = filemd5("glue/${local.module_name}/main.py")
+#  etag = filemd5("glue/${local.module_name}/main.py")
 }
 
 # Define the Glue job resource
