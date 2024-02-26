@@ -16,5 +16,5 @@ variable "project" {
 
 variable "module_path" {
   type    = string
-#  default = "/glue/job1/"
+  default = "/glue/"
 }
