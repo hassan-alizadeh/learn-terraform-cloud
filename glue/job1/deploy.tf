@@ -57,3 +57,16 @@ output "output-job1-02" {
 output "output-role_arn" {
   value = var.glue_service_role_arn
 }
+
+variable "module_path" {
+  type    = string
+#  default = "/glue/job1/"
+}
+
+locals {
+  module_name = basename(var.module_path)
+}
+
+output "module_name" {
+  value = local.module_name
+}
