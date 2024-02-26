@@ -36,21 +36,21 @@ output "module_name" {
 
 resource "aws_s3_object" "this" {
   bucket = var.s3_bucket
-  key = "glue/job1/main.py"
-  source = "../glue/job1/main.py"
-#  etag = filemd5("glue/job1/main.py")
+  key = "glue/${local.module_name}/main.py"
+  source = "../glue/${local.module_name}/main.py"
+  etag = filemd5("glue/${local.module_name}/main.py")
 }
 
 # Define the Glue job resource
 resource "aws_glue_job" "this" {
-  name        =local.module_name #"job1"#var.job_name
+  name        = local.module_name #"job1"#var.job_name
   description = "Desc job1" #var.job_description
   role_arn    = var.glue_service_role_arn
 
   command {
     name            = "pythonshell"
     python_version  = "3.9"
-    script_location = "s3://${var.s3_bucket}/glue/job1/main.py"
+    script_location = "s3://${var.s3_bucket}/glue/${local.module_name}/main.py"
   }
 
   default_arguments = {
