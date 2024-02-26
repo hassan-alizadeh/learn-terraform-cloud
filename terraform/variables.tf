@@ -12,3 +12,4 @@ variable "project" {
   type    = string
   default = "terraform_glue_job_deployment"
 }
+

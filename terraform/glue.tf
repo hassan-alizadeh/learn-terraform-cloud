@@ -9,8 +9,14 @@ output "glue_job_folders_output" {
   value = local.glue_job_folders
 }
 
+output "glue_service_role_arn" {
+  value = aws_iam_role.glue_service_role.arn
+}
+
 module "glue_job1" {
   source = "../glue/job1/"
+  s3_bucket = var.s3_bucket
+  glue_service_role_arn = aws_iam_role.glue_service_role.arn
 #    job_name = "job1"
     /*job_role_arn = "arn:aws:iam::123456789012:role/service-role/AWSGlueServiceRole-DefaultRole"
     job_command_script_location = "s3://my-bucket/glue-scripts/job1.py"

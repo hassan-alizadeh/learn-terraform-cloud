@@ -1,5 +1,19 @@
 # deploy.tf
 
+variable "s3_bucket" {
+    description = "The name of the S3 bucket to use for the Glue job"
+    type        = string
+}
+
+variable "project" {
+    description = "The name of the project"
+    type        = string
+}
+
+variable "glue_service_role_arn" {
+  type = string
+}
+# Define the IAM role for the Glue service
 
 resource "aws_s3_object" "this" {
   bucket = var.s3_bucket
@@ -12,7 +26,7 @@ resource "aws_s3_object" "this" {
 resource "aws_glue_job" "this" {
   name        = "job1"#var.job_name
   description = "Desc job1" #var.job_description
-  role_arn    = aws_iam_role.glue_service_role.arn
+  role_arn    = var.glue_service_role_arn
 
   command {
     name            = "pythonshell"
@@ -28,4 +42,17 @@ resource "aws_glue_job" "this" {
   tags = {
     project = var.project
   }
+}
+
+
+output "output-job1-01" {
+  value = var.project
+}
+
+output "output-job1-02" {
+  value = var.s3_bucket
+}
+
+output "output-role_arn" {
+  value = var.glue_service_role_arn
 }
