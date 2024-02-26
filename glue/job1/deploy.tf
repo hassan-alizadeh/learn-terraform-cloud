@@ -22,6 +22,7 @@ resource "aws_s3_object" "this" {
 #  etag = filemd5("glue/job1/main.py")
 }
 
+
 # Define the Glue job resource
 resource "aws_glue_job" "this" {
   name        = "job1"#var.job_name
