@@ -19,7 +19,7 @@ resource "aws_s3_object" "this" {
   bucket = var.s3_bucket
   key = "glue/job1/main.py"
   source = "glue/job1/main.py"
-  etag = filemd5("glue/job1/main.py")
+#  etag = filemd5("glue/job1/main.py")
 }
 
 # Define the Glue job resource
