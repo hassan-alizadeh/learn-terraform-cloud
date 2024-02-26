@@ -12,6 +12,7 @@ output "glue_job_folders_output" {
 output "glue_service_role_arn" {
   value = aws_iam_role.glue_service_role.arn
 }
+
 /*
 
 module "glue_job1" {
@@ -29,33 +30,19 @@ module "glue_job2" {
 }
 */
 
-locals {
-  module_configurations = [
-    {
-      module_name          = "glue_job1"
-      module_source        = "../glue/job1/"
-      s3_bucket            = var.s3_bucket
-      project              = var.project
-      glue_service_role_arn = aws_iam_role.glue_service_role.arn
-    },
-    {
-      module_name          = "glue_job2"
-      module_source        = "../glue/job2/"
-      s3_bucket            = var.s3_bucket
-      project              = var.project
-      glue_service_role_arn = aws_iam_role.glue_service_role.arn
-    }
-    // Add more module configurations as needed
-  ]
-}
 
-dynamic "module" {
-  for_each = { for cfg in local.module_configurations : cfg.module_name => cfg }
 
-  content {
-    source               = module.value.module_source
-    s3_bucket            = module.value.s3_bucket
-    project              = module.value.project
-    glue_service_role_arn = module.value.glue_service_role_arn
+
+module "glue_jobs" {
+  source = "../glue/"
+
+  for_each = {
+    for folder in local.glue_job_folders : folder => folder
   }
+
+  module_name          = each.key
+  module_source        = "../glue/${each.value}/"
+  s3_bucket            = var.s3_bucket
+  project              = var.project
+  glue_service_role_arn = aws_iam_role.glue_service_role.arn
 }
