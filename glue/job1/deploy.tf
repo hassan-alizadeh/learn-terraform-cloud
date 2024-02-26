@@ -10,7 +10,6 @@ variable "project" {
     type        = string
 }
 
-
 variable "glue_service_role_arn" {
   type = string
 }
