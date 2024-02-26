@@ -13,7 +13,6 @@ variable "project" {
 variable "glue_service_role_arn" {
   type = string
 }
-# Define the IAM role for the Glue service
 
 resource "aws_s3_object" "this" {
   bucket = var.s3_bucket

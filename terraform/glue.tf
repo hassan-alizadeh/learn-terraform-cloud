@@ -16,6 +16,7 @@ output "glue_service_role_arn" {
 module "glue_job1" {
   source = "../glue/job1/"
   s3_bucket = var.s3_bucket
+  project = var.project
   glue_service_role_arn = aws_iam_role.glue_service_role.arn
 #    job_name = "job1"
     /*job_role_arn = "arn:aws:iam::123456789012:role/service-role/AWSGlueServiceRole-DefaultRole"
