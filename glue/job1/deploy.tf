@@ -25,8 +25,9 @@ variable "module_path" {
 */
 locals {
 #  module_name = [for dir in fileset(path.module, "../glue/**/*.tf"): dirname(dir)]
-  module_path = dirname(fileset(path.module, "deploy.tf"))
-  module_name = element(split("/", module_path), length(split("/", module_path)) - 1)
+#  module_path = dirname(fileset(path.module, "deploy.tf"))
+#  module_name = element(split("/", module_path), length(split("/", module_path)) - 1)
+  module_name = basename(path.module)
 }
 
 output "module_name" {
