@@ -34,7 +34,7 @@ module "glue_job2" {
 
 
 module "glue_jobs" {
-  source = "../glue/"
+  source = "../glue/glue_jobs"
 
   for_each = {
     for folder in local.glue_job_folders : folder => folder
