@@ -34,14 +34,14 @@ module "glue_job2" {
 
 
 module "glue_jobs" {
-  source = "../glue/glue_jobs"
+  source = "../glue/"
 
   for_each = {
-    for folder in local.glue_job_folders : folder => folder
+    for folder in local.glue_job_folders : folder => folder #"../glue/${folder}/"
   }
 
   module_name          = each.key
-  module_source        = "../glue/${each.value}/"
+  module_source        = each.value
   s3_bucket            = var.s3_bucket
   project              = var.project
   glue_service_role_arn = aws_iam_role.glue_service_role.arn
