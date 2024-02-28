@@ -18,7 +18,6 @@ variable "module_source" {
     default = "../glue/"
 }
 
-variable "module_name" {}
 /*
 
 variable "module_path" {
