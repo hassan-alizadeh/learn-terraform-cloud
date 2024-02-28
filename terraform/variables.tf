@@ -14,10 +14,11 @@ variable "project" {
 }
 
 variable "module_source" {
-
     type    = string
-    default = "../glue/glue_jobs"
+    default = "../glue/"
 }
+
+variable "module_name" {}
 /*
 
 variable "module_path" {

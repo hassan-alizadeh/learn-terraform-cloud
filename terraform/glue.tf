@@ -13,6 +13,8 @@ output "glue_service_role_arn" {
   value = aws_iam_role.glue_service_role.arn
 }
 
+
+
 /*
 
 module "glue_job1" {
@@ -32,12 +34,39 @@ module "glue_job2" {
 
 
 
+# Generate modules for each Glue job folder
+module "glue_jobs" {
+  source = "../glue"  # Assuming the source directory for Glue job modules is "./glue"
+#  for_each = toset(local.glue_job_folders) #{ for folder in local.glue_job_folders : folder => folder }
+
+  # Passing necessary variables to the Glue job module
+
+#      dynamic "content"{
+#        for_each = toset(local.glue_job_folders)
+#        content {
+#          module_name = source.value
+          s3_bucket = var.s3_bucket
+          project = var.project
+          glue_service_role_arn = aws_iam_role.glue_service_role.arn
+#        }
+
+
+}
+
+
+# Dynamically call each module existing within the directory "../glue/"
+
+
+
+
+
+/*
 
 module "glue_jobs" {
-  source = "../glue/"
+  source = "../glue/glue_jobs/"
 
   for_each = {
-    for folder in local.glue_job_folders : folder => folder #"../glue/${folder}/"
+    for folder in local.glue_job_folders : folder => folder... #"../glue/${folder}/"
   }
 
   module_name          = each.key
@@ -46,3 +75,4 @@ module "glue_jobs" {
   project              = var.project
   glue_service_role_arn = aws_iam_role.glue_service_role.arn
 }
+*/
